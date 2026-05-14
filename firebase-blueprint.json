@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "An application or interest lead for the Medizer network.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "contacted", "accepted", "rejected"] },
+        "bio": { "type": "string" },
+        "reference": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "name", "createdAt", "status"]
+    },
+    "SearchableContent": {
+      "title": "SearchableContent",
+      "description": "Index of content available for search.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "url": { "type": "string" },
+        "category": { "type": "string", "enum": ["article", "page", "resource"] },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["title", "url", "category"]
+    }
+  },
+  "firestore": {
+    "search_index/{id}": {
+      "schema": "SearchableContent",
+      "description": "Publicly searchable index of site content."
+    },
+    "leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Store application leads for the exclusive network."
+    }
+  }
+}
