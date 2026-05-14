@@ -138,8 +138,8 @@ export default function Ethics() {
         <div className="corp-container">
            <div className="grid lg:grid-cols-2 gap-32 items-center">
               <div className="space-y-12">
-                 <h2 className="text-5xl font-bold tracking-tighter text-green-950 leading-tight italic">Institutional <br /> Verification.</h2>
-                 <p className="text-2xl text-stone-500 leading-relaxed font-serif italic border-l-4 border-green-700 pl-12 py-4">
+                 <h2 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 leading-tight italic">Institutional <br /> Verification.</h2>
+                 <p className="text-xl text-stone-500 leading-relaxed font-serif italic py-4">
                     Medizer operates under strict bio-ethical frameworks established at our Geneva foundation. Our protocols are subject to bi-annual review by independent scholars.
                  </p>
                  <div className="flex flex-col gap-6 pt-12">

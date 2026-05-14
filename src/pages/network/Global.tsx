@@ -67,7 +67,7 @@ export default function Global() {
               </div>
               <div className="grid md:grid-cols-2 gap-16 items-center">
                 <div className="space-y-12">
-                  <p className="text-2xl text-stone-500 leading-relaxed font-medium">
+                  <p className="text-xl text-stone-500 leading-relaxed font-medium">
                     The host of our primary clinical board and the central repository for the Global Registry.
                   </p>
                   <div className="space-y-4">
@@ -238,8 +238,8 @@ export default function Global() {
                   </div>
                </div>
                <div className="lg:col-span-6 order-1 lg:order-2 space-y-12">
-                  <h3 className="text-6xl font-bold tracking-tighter text-green-950 italic">Fortress <br /> Compliance.</h3>
-                  <p className="text-xl text-stone-500 leading-relaxed font-medium">
+                  <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 italic">Fortress <br /> Compliance.</h3>
+                  <p className="text-lg text-stone-500 leading-relaxed font-medium">
                      Every Medizer facility is built to institutional fortress standards. We do not rent space; we commission the architecture.
                   </p>
                   <ul className="space-y-6 text-stone-500 font-medium list-none text-lg">

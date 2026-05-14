@@ -13,17 +13,16 @@ export default function Heritage({ t }: { t: any }) {
         <div className="corp-container relative z-10">
           <div className="flex flex-col lg:flex-row gap-20 items-end justify-between">
              <div className="max-w-4xl">
-                <div className="flex items-center gap-6 mb-16">
-                  <div className="w-16 h-[1px] bg-green-900/30" />
-                  <span className="text-base font-bold text-green-900">Established 1926</span>
+                <div className="mb-12">
+                  <span className="text-sm font-bold text-green-900 uppercase tracking-widest">Established 1926</span>
                 </div>
-                <h1 className="text-8xl lg:text-[14rem] font-bold tracking-tighter leading-[0.7] mb-12 italic text-green-950">
+                <h1 className="text-6xl lg:text-8xl font-bold tracking-tighter leading-none mb-12 italic text-green-950">
                    Clinical <br />
                    <span className="text-stone-200 not-italic">Heritage.</span>
                 </h1>
              </div>
-             <div className="lg:max-w-sm mb-6">
-                <p className="text-3xl text-green-900 font-serif italic leading-tight">
+             <div className="lg:max-w-sm mb-12">
+                <p className="text-xl text-green-900 font-serif italic leading-relaxed py-6">
                    "Our longevity is measured not in years, but in the biological resilience of our families."
                 </p>
              </div>
@@ -50,12 +49,11 @@ export default function Heritage({ t }: { t: any }) {
               
               <div className="lg:col-span-7 lg:pl-16 space-y-24">
                  <div className="max-w-xl">
-                    <div className="flex items-center gap-6 mb-12">
-                      <div className="w-8 h-px bg-green-700/30" />
-                      <span className="text-base font-bold text-green-700">Institutional Ethos</span>
+                    <div className="mb-12">
+                      <span className="text-sm font-bold text-green-700 uppercase tracking-widest">Institutional Ethos</span>
                     </div>
                     <div className="space-y-12">
-                       <p className="text-4xl text-stone-800 leading-tight font-serif italic">
+                       <p className="text-3xl text-stone-800 leading-tight font-serif italic">
                           "We believe that reactive medicine is a strategic failure. True clinical excellence lies in predicting decay before it manifests."
                        </p>
                        <p className="text-xl text-stone-500 leading-relaxed font-medium">

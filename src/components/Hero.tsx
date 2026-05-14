@@ -21,8 +21,7 @@ export default function Hero({ t }: { t: any }) {
 
         <div className="corp-container relative z-20">
           <div className="max-w-[700px] py-24">
-            <span className="block mb-6 text-base font-bold text-green-700 inline-flex items-center gap-3">
-              <div className="w-8 h-[1px] bg-green-700/30" />
+            <span className="text-sm font-bold text-green-700 uppercase tracking-widest block mb-6">
               {t.established}
             </span>
             <h1 className="font-bold mb-8 leading-[1.05] tracking-tighter text-6xl lg:text-8xl text-green-950">

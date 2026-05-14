@@ -140,8 +140,7 @@ export default function Monitoring() {
                           desc: 'Instant isolation of corrupted or inconsistent data streams to prevent analytical pollution of the Global Registry.'
                        }
                     ].map((item, i) => (
-                       <div key={i} className="space-y-6">
-                          <div className="w-12 h-px bg-green-700/30" />
+                       <div key={i} className="space-y-4">
                           <h4 className="text-xl font-bold text-green-950 italic">{item.title}</h4>
                           <p className="text-lg text-stone-500 leading-relaxed font-medium">{item.desc}</p>
                        </div>

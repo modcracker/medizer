@@ -173,8 +173,8 @@ export default function Core() {
       <section className="py-48 bg-[#fbfcfb] text-left">
          <div className="corp-container">
             <div className="max-w-4xl mb-24">
-               <h3 className="text-5xl font-bold tracking-tighter text-green-950 italic mb-8">Clinical Synthesis Modules.</h3>
-               <p className="text-xl text-stone-500 font-medium">The Core operates through three primary analytical domains, each governed by its own set of institutional protocols and ethical guardrails.</p>
+               <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 italic mb-8">Clinical Synthesis Modules.</h3>
+               <p className="text-lg text-stone-500 font-medium">The Core operates through three primary analytical domains, each governed by its own set of institutional protocols and ethical guardrails.</p>
             </div>
             
             <div className="grid lg:grid-cols-3 gap-12">
