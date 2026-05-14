@@ -11,11 +11,11 @@ try {
   // We don't throw to prevent white screen, but exports below will be handled
 }
 
-export const db = app ? getFirestore(app, firebaseConfig.firestoreDatabaseId) : null as any;
-export const auth = app ? getAuth(app) : null as any;
+export const db = app ? getFirestore(app, firebaseConfig?.firestoreDatabaseId) : null;
+export const auth = app ? getAuth(app) : null;
 
 export async function seedContent() {
-  if (!db) return;
+  if (!db || !app) return;
   const { collection, getDocs, setDoc, doc } = await import('firebase/firestore');
   const snapshot = await getDocs(collection(db, 'search_index'));
   
@@ -83,10 +83,7 @@ export async function seedContent() {
   const needsSeeding = snapshot.empty || !snapshot.docs.every(d => d.data().searchKeywords);
 
   if (needsSeeding) {
-    const { getAuth, signInWithPopup, GoogleAuthProvider } = await import('firebase/auth');
-    const auth = getAuth();
-    
-    if (!auth.currentUser) {
+    if (!auth || !auth.currentUser) {
       console.log("Seeding requires admin authentication. Please sign in if you are the developer.");
       // We don't force popup here to avoid blocking users, but we log the requirement
       return;
@@ -112,6 +109,7 @@ export async function seedContent() {
 
 // connection test
 async function testConnection() {
+  if (!db) return;
   try {
     await getDocFromServer(doc(db, 'test', 'connection'));
   } catch (error) {

@@ -8,6 +8,10 @@ export default function Application({ t }: { t: any }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!db) {
+      alert("System offline. Please check your connection or contact support directly.");
+      return;
+    }
     setStatus('submitting');
     try {
       await addDoc(collection(db, 'leads'), {

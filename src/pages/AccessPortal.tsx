@@ -10,6 +10,10 @@ export default function AccessPortal() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (!auth) {
+      setIsLoading(false);
+      return;
+    }
     const unsubscribe = onAuthStateChanged(auth, (u) => {
       setUser(u);
       setIsLoading(false);
@@ -18,6 +22,10 @@ export default function AccessPortal() {
   }, []);
 
   const handleSignIn = async () => {
+    if (!auth) {
+      alert("Authentication system currently offline.");
+      return;
+    }
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
@@ -101,7 +109,7 @@ export default function AccessPortal() {
                       </p>
                     </div>
                     <button 
-                      onClick={() => auth.signOut()}
+                      onClick={() => auth?.signOut()}
                       className="text-sm font-bold text-stone-400 hover:text-red-700 transition-colors"
                     >
                       End Session

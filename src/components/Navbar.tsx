@@ -47,7 +47,7 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
 
   useEffect(() => {
     const performSearch = async () => {
-      if (searchQuery.trim().length < 2) {
+      if (!db || searchQuery.trim().length < 2) {
         setSearchResults([]);
         return;
       }
