@@ -1,14 +1,15 @@
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
-import firebaseConfig from '@/firebase-applet-config.json';
+import firebaseConfig from '../../firebase-applet-config.json';
 
 let app;
 try {
-  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+  if (firebaseConfig && firebaseConfig.apiKey) {
+    app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+  }
 } catch (error) {
-  console.error("Firebase initialization failed. Using mock/null services.", error);
-  // We don't throw to prevent white screen, but exports below will be handled
+  console.error("Firebase initialization failed.", error);
 }
 
 export const db = app ? getFirestore(app, firebaseConfig?.firestoreDatabaseId) : null;

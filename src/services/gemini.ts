@@ -1,8 +1,12 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const apiKey = (process as any).env?.GEMINI_API_KEY || '';
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export async function getHealthInsights(prompt: string) {
+  if (!ai) {
+    return "The clinical intelligence network is currently operating in local-only mode. AI insights are temporarily unavailable.";
+  }
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
