@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Globe, Shield, MapPin, Building2, Zap, ArrowRight, Activity } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export default function Global() {
+export default function Global({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

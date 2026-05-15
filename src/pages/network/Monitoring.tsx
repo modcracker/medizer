@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Activity, Shield, Cpu, Lock, Terminal, Activity as ActivityIcon, CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export default function Monitoring() {
+export default function Monitoring({ t }: { t: any }) {
   const [lastSync, setLastSync] = useState(new Date());
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { getHealthInsights } from '../services/gemini';
 
-export default function HealthAI() {
+export default function HealthAI({ t }: { t: any }) {
   const [messages, setMessages] = useState([
-    { role: 'ai', text: 'Health Analysis system active. How can we assist with your clinical inquiry today?' }
+    { role: 'ai', text: t.result_headline || 'Health Analysis system active. How can we assist with your clinical inquiry today?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -26,8 +26,8 @@ export default function HealthAI() {
       <div className="corp-container">
         <div className="grid lg:grid-cols-12 gap-16 mb-20">
           <div className="lg:col-span-8">
-            <h2 className="font-bold text-4xl lg:text-5xl text-green-950 tracking-tighter mb-8 leading-tight">Digital Consultation.</h2>
-            <p className="text-stone-600 text-xl font-medium max-w-[600px]">Secure messaging for medical analysis and clinical inquiries.</p>
+            <h2 className="font-bold text-4xl lg:text-5xl text-green-950 tracking-tighter mb-8 leading-tight">{t.title}</h2>
+            <p className="text-stone-600 text-xl font-medium max-w-[600px]">{t.description}</p>
           </div>
         </div>
 
@@ -74,7 +74,7 @@ export default function HealthAI() {
                 <div className="flex justify-start">
                   <div className="flex gap-2 items-center">
                     <div className="w-2 h-2 bg-green-600 animate-pulse rounded-full" />
-                    <span className="text-sm font-bold text-green-700 ml-2">Processing...</span>
+                    <span className="text-sm font-bold text-green-700 ml-2">{t.analyzing}</span>
                   </div>
                 </div>
               )}
@@ -86,7 +86,7 @@ export default function HealthAI() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Type your inquiry..."
+                placeholder={t.placeholder}
                 className="w-full bg-transparent border-none py-6 pl-0 pr-32 focus:outline-none text-green-950 font-bold placeholder:text-stone-200 text-xl tracking-tight"
               />
               <button 
@@ -94,7 +94,7 @@ export default function HealthAI() {
                 disabled={isLoading || !input.trim()}
                 className="absolute right-0 top-1/2 -translate-y-1/2 bg-green-700 px-8 py-3 rounded-xs text-sm font-bold text-white hover:bg-green-600 disabled:opacity-30 transition-all shadow-xl shadow-green-900/10"
               >
-                Send
+                {t.action}
               </button>
             </div>
           </div>

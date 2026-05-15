@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
-export default function Support() {
+export default function Support({ t }: { t: any }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,6 +10,8 @@ export default function Support() {
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const ts = t.support;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -65,9 +67,9 @@ export default function Support() {
               <div className="w-8 h-[1px] bg-green-700/30" />
               LIAISON / SUPPORT
             </span>
-            <h1 className="font-bold text-6xl lg:text-7xl text-green-950 tracking-tighter mb-8 italic">Support Services.</h1>
+            <h1 className="font-bold text-6xl lg:text-7xl text-green-950 tracking-tighter mb-8 italic">{ts.hero_title}</h1>
             <p className="text-xl text-stone-600 leading-relaxed max-w-[600px] mx-auto md:mx-0">
-              Direct institutional support for current members and verified inquiries.
+              {ts.hero_desc}
             </p>
           </div>
         </div>
@@ -78,9 +80,9 @@ export default function Support() {
           <div className="grid lg:grid-cols-2 gap-24">
             <div>
               <span className="text-[13px] font-semibold text-green-700 block mb-4 uppercase tracking-[0.2em]">Contact Node</span>
-              <h2 className="font-bold text-3xl text-green-950 tracking-tighter mb-8 italic">Institutional liaison.</h2>
+              <h2 className="font-bold text-3xl text-green-950 tracking-tighter mb-8 italic">{ts.form_title}</h2>
               <p className="text-stone-600 text-lg leading-relaxed mb-12">
-                Direct institutional support for current members and verified inquiries. Our liaison officers are available for jurisdictional coordination and clinical data management assistance.
+                {ts.form_desc}
               </p>
 
               <div className="space-y-8 pt-8 border-t border-stone-100">

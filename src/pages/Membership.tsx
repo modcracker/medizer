@@ -6,6 +6,8 @@ export default function Membership({ t }: { t: any }) {
     window.scrollTo(0, 0);
   }, []);
 
+  const tm = t.membership;
+
   return (
     <div className="bg-[#fbfcfb] overflow-x-hidden">
       {/* Page Hero */}
@@ -29,9 +31,9 @@ export default function Membership({ t }: { t: any }) {
               <div className="w-8 h-[1px] bg-green-700/30" />
               SYSTEMS / ACCESS
             </span>
-            <h1 className="font-bold text-6xl lg:text-8xl text-green-950 tracking-tighter mb-8 italic">Membership.</h1>
+            <h1 className="font-bold text-6xl lg:text-8xl text-green-950 tracking-tighter mb-8 italic">{tm.hero_title}</h1>
             <p className="text-xl text-stone-600 leading-relaxed max-w-[500px]">
-              Initiate your biological protocol. Access to the Medizer network is strictly managed to ensure institutional integrity.
+              {tm.hero_desc}
             </p>
           </div>
         </div>

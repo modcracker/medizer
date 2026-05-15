@@ -2,27 +2,29 @@ import React, { useEffect } from 'react';
 import { Activity, Shield, Zap, Sparkles, Binary, Fingerprint, Brain, Database, MessageSquare } from 'lucide-react';
 import HealthAI from '../components/HealthAI';
 
-export default function Intelligence() {
+export default function Intelligence({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const tc = t.common;
 
   return (
     <div className="bg-white min-h-screen">
       {/* Editorial Tech Header */}
       <section className="pt-60 pb-32 border-b border-stone-200 bg-stone-50 relative overflow-hidden">
         <div className="corp-container relative z-10">
-           <div className="grid lg:grid-cols-12 gap-16 items-end">
-              <div className="lg:col-span-8">
-                 <div className="flex items-center gap-6 mb-12">
-                   <div className="w-12 h-px bg-green-700/30" />
-                   <span className="text-base font-bold text-green-700">Governance & Advisory</span>
-                 </div>
-                 <h1 className="text-7xl lg:text-9xl font-bold text-green-950 tracking-tighter leading-[0.95] mb-12 italic">
-                    Clinical <br />
-                    <span className="text-stone-300 not-italic">Directives.</span>
-                 </h1>
+          <div className="grid lg:grid-cols-12 gap-16 items-end">
+            <div className="lg:col-span-8">
+              <div className="flex items-center gap-6 mb-12">
+                <div className="w-12 h-px bg-green-700/30" />
+                <span className="text-base font-bold text-green-700">{tc.intelligence} & {tc.advisory}</span>
               </div>
+              <h1 className="text-7xl lg:text-9xl font-bold text-green-950 tracking-tighter leading-[0.95] mb-12 italic">
+                Clinical <br />
+                <span className="text-stone-300 not-italic">Directives.</span>
+              </h1>
+            </div>
               <div className="lg:col-span-4 pb-4">
                  <p className="text-2xl text-stone-500 leading-tight font-serif italic mb-8">
                     "We translate biological complexity into definitive strategic intelligence."
@@ -68,7 +70,7 @@ export default function Intelligence() {
                           <span className="text-[9px] font-mono font-bold text-stone-400 uppercase">SYS_LINK // ALPHA_GENEVA</span>
                        </div>
                        <div className="bg-white">
-                          <HealthAI />
+                          <HealthAI t={t.healthAi} />
                        </div>
                     </div>
                  </div>

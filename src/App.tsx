@@ -45,33 +45,33 @@ export default function App() {
           <Route path="/" element={<Home t={t} />} />
           
           {/* Network */}
-          <Route path="/network" element={<Infrastructure />} />
-          <Route path="/network/global" element={<Global />} />
-          <Route path="/network/monitoring" element={<Monitoring />} />
+          <Route path="/network" element={<Infrastructure t={t} />} />
+          <Route path="/network/global" element={<Global t={t} />} />
+          <Route path="/network/monitoring" element={<Monitoring t={t} />} />
           
           {/* Analysis */}
-          <Route path="/analysis" element={<Intelligence />} />
-          <Route path="/analysis/core" element={<Core />} />
-          <Route path="/analysis/ethics" element={<Ethics />} />
+          <Route path="/analysis" element={<Intelligence t={t} />} />
+          <Route path="/analysis/core" element={<Core t={t} />} />
+          <Route path="/analysis/ethics" element={<Ethics t={t} />} />
           
           {/* Heritage */}
           <Route path="/heritage" element={<Heritage t={t} />} />
           <Route path="/heritage/ethos" element={<Ethos t={t} />} />
-          <Route path="/heritage/directives" element={<Directives />} />
-          <Route path="/heritage/review" element={<Review />} />
-          <Route path="/heritage/governance/board" element={<Board />} />
-          <Route path="/heritage/governance/rights" element={<Rights />} />
+          <Route path="/heritage/directives" element={<Directives t={t} />} />
+          <Route path="/heritage/review" element={<Review t={t} />} />
+          <Route path="/heritage/governance/board" element={<Board t={t} />} />
+          <Route path="/heritage/governance/rights" element={<Rights t={t} />} />
           
           {/* Support & Membership */}
-          <Route path="/support" element={<Support />} />
+          <Route path="/support" element={<Support t={t} />} />
           <Route path="/membership" element={<Membership t={t} />} />
-          <Route path="/access" element={<AccessPortal />} />
+          <Route path="/access" element={<AccessPortal t={t} />} />
 
           {/* Fallbacks for old URLs to prevent broken links */}
           <Route path="/institutional" element={<Heritage t={t} />} />
-          <Route path="/infrastructure" element={<Infrastructure />} />
-          <Route path="/intelligence" element={<Intelligence />} />
-          <Route path="/liaison" element={<Support />} />
+          <Route path="/infrastructure" element={<Infrastructure t={t} />} />
+          <Route path="/intelligence" element={<Intelligence t={t} />} />
+          <Route path="/liaison" element={<Support t={t} />} />
           <Route path="/apply" element={<Membership t={t} />} />
         </Routes>
       </main>

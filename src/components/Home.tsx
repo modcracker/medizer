@@ -15,9 +15,9 @@ export default function Home({ t }: { t: any }) {
     <>
       <Hero t={t.hero} />
       <Philosophy t={t.philosophy} />
-      <Features />
-      <GlobalNetwork />
-      <HealthAI />
+      <Features t={t.features} />
+      <GlobalNetwork t={t} />
+      <HealthAI t={t.healthAi} />
       <Application t={t.application} />
     </>
   );

@@ -50,17 +50,18 @@ const networkFacilities = [
   },
 ];
 
-export default function GlobalNetwork() {
+export default function GlobalNetwork({ t }: { t: any }) {
+  const tg = t.globalNetwork || {};
   return (
     <section id="infrastructure" className="py-32 lg:py-48 bg-[#fbfbfb] overflow-hidden border-t border-stone-100">
       <div className="corp-container">
         <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-20 lg:mb-32">
           <div className="max-w-2xl">
             <h2 className="font-bold text-4xl lg:text-5xl text-green-950 tracking-tighter mb-8">
-              Regional Centers.
+              {tg.title || 'Regional Centers.'}
             </h2>
             <p className="text-xl text-stone-500 leading-relaxed max-w-[600px]">
-              Medizer operates a network of high-security clinical environments. Each facility is equipped with proprietary diagnostic arrays and direct links to Geneva headquarters.
+              {tg.description || 'Medizer operates a network of high-security clinical environments.'}
             </p>
           </div>
           <div className="flex flex-col items-end gap-4 pb-4">

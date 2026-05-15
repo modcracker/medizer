@@ -3,7 +3,7 @@ import { ShieldCheck, Scale, ArrowRight, FileText, Gavel, Eye, Lock } from 'luci
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 
-export default function Ethics() {
+export default function Ethics({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

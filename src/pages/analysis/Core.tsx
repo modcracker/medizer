@@ -4,7 +4,7 @@ import { ArrowRight, Cpu, Network, Zap, Shield, Database, Activity } from 'lucid
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 
-export default function Core() {
+export default function Core({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -59,7 +59,7 @@ export default function Core() {
                <Cpu className="w-5 h-5 text-green-700" />
                <span className="text-xs font-bold text-stone-400 uppercase tracking-widest font-mono">Status // Nominal</span>
             </div>
-            <HealthAI />
+            <HealthAI t={t.healthAI} />
          </div>
       </section>
 

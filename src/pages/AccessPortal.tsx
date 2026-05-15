@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { auth } from '../services/firebase';
 import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 
-export default function AccessPortal() {
+export default function AccessPortal({ t }: { t: any }) {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

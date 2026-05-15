@@ -8,10 +8,12 @@ const networkFacilities = [
   { id: 'AE-DX-01', city: 'Dubai', type: 'Medical Facility', status: 'Optimal', load: '65%', uptime: '99.999%' },
 ];
 
-export default function Infrastructure() {
+export default function Infrastructure({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const tc = t.common;
 
   return (
     <div className="bg-[#fbfcfb] text-[#1a1a1a] min-h-screen">
@@ -22,11 +24,11 @@ export default function Infrastructure() {
             <div className="max-w-3xl">
               <div className="flex items-center gap-4 mb-12">
                 <div className="w-12 h-[1px] bg-green-700/30" />
-                <span className="text-base font-bold text-green-700">Systems Architecture</span>
+                <span className="text-base font-bold text-green-700">{tc.systems} {tc.architecture}</span>
               </div>
               <h1 className="text-7xl lg:text-9xl font-bold tracking-tighter leading-[0.95] mb-12 text-green-950">
                 Institutional <br />
-                <span className="text-stone-300 italic">Foundation.</span>
+                <span className="text-stone-300 italic">{tc.infrastructure}.</span>
               </h1>
             </div>
             <div className="lg:max-w-sm pb-4">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Shield, Plus, Search, Languages, Loader2, ChevronDown, Activity, Globe, Zap, Cpu, History, Scale, FileText, Mail, Phone, MapPin } from 'lucide-react';
+import { Shield, Plus, Search, Languages, Loader2, ChevronDown, Activity, Globe, Zap, Cpu, History, Scale, FileText, Mail, Phone, MapPin, Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../services/firebase';
@@ -29,6 +29,7 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const navigate = useNavigate();
   const t = translations[currentLang].common;
@@ -81,7 +82,18 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
         });
 
         const results = Array.from(resultsMap.values()) as SearchResult[];
-        setSearchResults(results);
+        
+        // Fallback for demo purposes if no results found
+        if (results.length === 0) {
+          const fallbacks: SearchResult[] = [
+            { id: 'heritage', title: 'Institutional Heritage', excerpt: 'Our legacy since 1926.', url: '/heritage', category: 'Page' },
+            { id: 'network', title: 'Global Network', excerpt: 'View our clinical residency sites.', url: '/network', category: 'Page' },
+            { id: 'liaison', title: 'Support Liaison', excerpt: 'Direct communication with our team.', url: '/support', category: 'Page' }
+          ].filter(item => item.title.toLowerCase().includes(queryText));
+          setSearchResults(fallbacks);
+        } else {
+          setSearchResults(results);
+        }
       } catch (error) {
         console.error("Search error:", error);
       } finally {
@@ -260,7 +272,7 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="relative hidden sm:block">
+          <div className="relative hidden lg:block">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-300" />
             <input 
               type="text" 
@@ -323,7 +335,7 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
             </AnimatePresence>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden sm:block">
             <button 
               onClick={() => setIsLangOpen(!isLangOpen)}
               className="flex items-center gap-2 text-[12px] font-medium text-stone-500 hover:text-green-700 transition-colors px-4 py-2"
@@ -366,12 +378,90 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
             </AnimatePresence>
           </div>
 
-          <Link to="/membership" className="group relative overflow-hidden bg-green-700 text-white px-8 py-2.5 rounded-full text-[13px] font-medium hover:bg-green-800 transition-all shadow-md hover:shadow-lg shadow-green-900/10 active:scale-95">
+          <Link to="/membership" className="hidden sm:inline-flex group relative overflow-hidden bg-green-700 text-white px-8 py-2.5 rounded-full text-[13px] font-medium hover:bg-green-800 transition-all shadow-md hover:shadow-lg shadow-green-900/10 active:scale-95">
             <span className="relative z-10 text-white">{t.apply}</span>
             <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
           </Link>
+
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-stone-600 hover:text-green-700 transition-colors"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Panel */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-t border-stone-100 overflow-hidden"
+          >
+            <div className="corp-container py-8 space-y-6">
+              <div className="grid grid-cols-1 gap-6">
+                <Link 
+                  to="/network" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-bold text-green-950 flex items-center justify-between"
+                >
+                  {t.network}
+                  <ArrowRight className="w-4 h-4 text-stone-400" />
+                </Link>
+                <Link 
+                  to="/analysis" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-bold text-green-950 flex items-center justify-between"
+                >
+                  {t.advisory}
+                  <ArrowRight className="w-4 h-4 text-stone-400" />
+                </Link>
+                <Link 
+                  to="/heritage" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-bold text-green-950 flex items-center justify-between"
+                >
+                  {t.institutional}
+                  <ArrowRight className="w-4 h-4 text-stone-400" />
+                </Link>
+                <Link 
+                  to="/support" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-bold text-green-950 flex items-center justify-between"
+                >
+                  {t.liaison}
+                  <ArrowRight className="w-4 h-4 text-stone-400" />
+                </Link>
+              </div>
+
+              <div className="pt-6 border-t border-stone-100 flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  {['English', 'Deutsch', '日本語', 'Français'].map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => onLangChange(lang as Language)}
+                      className={`text-xs font-bold ${currentLang === lang ? 'text-green-700' : 'text-stone-400'}`}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+                <Link 
+                  to="/membership" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full bg-green-700 text-white py-4 rounded-sm text-center font-bold text-sm shadow-xl shadow-green-900/10"
+                >
+                  {t.apply}
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
