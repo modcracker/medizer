@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { Globe, Shield, MapPin, Building2, Zap, ArrowRight, Activity } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 
 export default function Global({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const tg = t.globalNetwork;
+  const tc = t.common;
 
   return (
     <div className="bg-white min-h-screen font-sans selection:bg-green-100 selection:text-green-900">
@@ -20,7 +24,7 @@ export default function Global({ t }: { t: any }) {
                   transition={{ duration: 0.8 }}
                   className="mb-8"
                 >
-                  <span className="text-sm font-bold text-green-900 uppercase tracking-widest">Global Clinical Residency</span>
+                  <span className="text-sm font-bold text-green-900 uppercase tracking-widest">{tc.network}</span>
                 </motion.div>
                 <motion.h1 
                   initial={{ opacity: 0, y: 30 }}
@@ -28,8 +32,8 @@ export default function Global({ t }: { t: any }) {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="text-6xl lg:text-8xl font-bold tracking-tighter leading-none mb-12 italic text-green-950"
                 >
-                   Continental <br />
-                   <span className="text-stone-200 not-italic">Presence.</span>
+                   {tg.title.split('.')[0]} <br />
+                   <span className="text-stone-200 not-italic">.</span>
                 </motion.h1>
               </div>
               <motion.div 
@@ -39,7 +43,7 @@ export default function Global({ t }: { t: any }) {
                 className="lg:max-w-sm mb-12"
               >
                 <p className="text-xl text-stone-500 leading-relaxed font-serif italic py-6">
-                   "Institutional geography is the foundation of clinical sovereignty. We maintain physical residency in key jurisdictions to ensure absolute privacy."
+                   {tg.description}
                 </p>
               </motion.div>
            </div>
@@ -58,8 +62,8 @@ export default function Global({ t }: { t: any }) {
             <div className="lg:col-span-8 bg-white p-16 lg:p-24 group relative overflow-hidden text-left">
               <div className="flex justify-between items-start mb-20">
                 <div className="space-y-4">
-                  <div className="text-xs font-bold text-stone-400 uppercase tracking-widest">HQ // Geneva</div>
-                  <h3 className="text-5xl lg:text-6xl font-bold text-green-950 tracking-tighter italic">Primary Core.</h3>
+                  <div className="text-xs font-bold text-stone-400 uppercase tracking-widest">HQ // {tg.nodes.geneva.city}</div>
+                  <h3 className="text-5xl lg:text-6xl font-bold text-green-950 tracking-tighter italic">{tg.nodes.geneva.title}.</h3>
                 </div>
                 <div className="bg-green-50 p-6 rounded-sm text-green-700">
                   <Building2 className="w-8 h-8" />
@@ -68,14 +72,14 @@ export default function Global({ t }: { t: any }) {
               <div className="grid md:grid-cols-2 gap-16 items-center">
                 <div className="space-y-12">
                   <p className="text-xl text-stone-500 leading-relaxed font-medium">
-                    The host of our primary clinical board and the central repository for the Global Registry.
+                    {tg.geneva_desc}
                   </p>
                   <div className="space-y-4">
-                    <div className="text-sm font-bold text-green-900 border-b border-green-900/10 pb-4">Specialization</div>
+                    <div className="text-sm font-bold text-green-900 border-b border-green-900/10 pb-4">{tg.specialization}</div>
                     <ul className="text-stone-500 space-y-2 text-sm font-medium">
-                      <li>• Institutional Data Archiving</li>
-                      <li>• Clinical Ethics Oversight</li>
-                      <li>• High-Value Lineage Management</li>
+                      {tg.specs_geneva.map((spec: string, i: number) => (
+                        <li key={i}>• {spec}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -97,20 +101,20 @@ export default function Global({ t }: { t: any }) {
             <div className="lg:col-span-4 bg-white p-16 group hover:bg-[#fbfcfb] transition-all text-left">
               <div className="space-y-12 h-full flex flex-col justify-between">
                 <div className="space-y-6">
-                  <div className="text-xs font-bold text-stone-400 uppercase tracking-widest">Regional // Singapore</div>
-                  <h3 className="text-4xl font-bold text-green-950 tracking-tight italic leading-none">Pacific Hub.</h3>
+                  <div className="text-xs font-bold text-stone-400 uppercase tracking-widest">Regional // {tg.nodes.singapore.city}</div>
+                  <h3 className="text-4xl font-bold text-green-950 tracking-tight italic leading-none">{tg.nodes.singapore.title}.</h3>
                   <p className="text-lg text-stone-500 leading-relaxed font-medium pt-8">
-                    Liaison center for localized clinical data residency in the Asian Pacific territories.
+                    {tg.singapore_desc}
                   </p>
                 </div>
                 <div className="pt-12 border-t border-stone-100">
                   <div className="flex justify-between items-center text-sm font-bold mb-4">
-                    <span className="text-stone-400">Staff Count</span>
-                    <span className="text-green-950">142 Specialists</span>
+                    <span className="text-stone-400">{tg.staff_count}</span>
+                    <span className="text-green-950">142 {tg.specialists}</span>
                   </div>
                   <div className="flex justify-between items-center text-sm font-bold">
-                    <span className="text-stone-400">Sovereignty</span>
-                    <span className="text-green-700">Full Autonomy</span>
+                    <span className="text-stone-400">{tg.sovereignty}</span>
+                    <span className="text-green-700">{tg.full_autonomy}</span>
                   </div>
                 </div>
               </div>
@@ -121,14 +125,14 @@ export default function Global({ t }: { t: any }) {
                <div className="space-y-12 h-full flex flex-col justify-between">
                   <div className="space-y-6">
                     <div className="text-xs font-bold text-stone-400 uppercase tracking-widest">Research // Zurich</div>
-                    <h3 className="text-4xl font-bold text-green-950 tracking-tight italic leading-none">Synthesis Lab.</h3>
+                    <h3 className="text-4xl font-bold text-green-950 tracking-tight italic leading-none">{tg.nodes.london.title}.</h3>
                     <p className="text-lg text-stone-500 leading-relaxed font-medium pt-8">
-                       Dedicated facility for high-fidelity sequencing and biological synthesis protocols.
+                       {tg.london_desc}
                     </p>
                   </div>
                   <div className="pt-12 border-t border-stone-100">
                     <div className="flex justify-between items-center text-sm font-bold">
-                      <span className="text-stone-400">Array Capacity</span>
+                      <span className="text-stone-400">{tg.array_capacity}</span>
                       <span className="text-green-950">2.4 PB/day</span>
                     </div>
                   </div>
@@ -140,15 +144,15 @@ export default function Global({ t }: { t: any }) {
               <div className="grid md:grid-cols-2 gap-16 items-center h-full">
                 <div className="space-y-12">
                   <div className="space-y-4">
-                    <div className="text-xs font-bold text-green-700 uppercase tracking-widest">Emergent // Dubai</div>
-                    <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter italic">Treatment Collective.</h3>
+                    <div className="text-xs font-bold text-green-700 uppercase tracking-widest">Emergent // {tg.nodes.dubai.city}</div>
+                    <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter italic">{tg.nodes.dubai.title}.</h3>
                   </div>
                   <p className="text-xl text-stone-400 leading-relaxed font-medium">
-                    Rapid-response facility for localized metabolic monitoring and acute biological optimization.
+                    {tg.dubai_desc}
                   </p>
                   <div className="inline-flex items-center gap-4 text-green-500 text-sm font-bold">
                     <Zap className="w-4 h-4" />
-                    <span>RESPONSE TIME: {"<"} 2H</span>
+                    <span>{tg.response_time}</span>
                   </div>
                 </div>
                 <div className="relative aspect-square md:aspect-auto h-64 md:h-full border border-white/10 bg-white/5 p-12 flex flex-col justify-center items-center text-center">
@@ -172,39 +176,22 @@ export default function Global({ t }: { t: any }) {
               <div className="lg:col-span-12 mb-32">
                  <div className="max-w-4xl">
                    <h2 className="text-sm font-bold text-green-900 mb-8 border-b border-green-900/10 pb-4 uppercase tracking-widest">Protocol Framework</h2>
-                   <h3 className="text-5xl lg:text-6xl font-bold tracking-tighter text-green-950 leading-tight mb-12 italic">Jurisdictional <br /> Intelligence.</h3>
+                   <h3 className="text-5xl lg:text-6xl font-bold tracking-tighter text-green-950 leading-tight mb-12 italic">{tg.protocol_title}</h3>
                    <p className="text-xl text-stone-500 font-serif italic leading-relaxed">
-                     Our selection of global nodes is driven by a requirement for absolute clinical and legal sovereignty. Each facility operates as a sub-sovereign entity within its territory.
+                     {tg.protocol_desc}
                    </p>
                  </div>
               </div>
 
               <div className="lg:col-span-5">
-                 <h2 className="text-sm font-bold text-green-900 mb-12 border-b border-green-900/10 pb-6 uppercase tracking-widest">Operational Continuity</h2>
-                 <h3 className="text-4xl font-bold tracking-tighter text-green-950 leading-tight mb-12 italic">Unified <br /> Directives.</h3>
+                 <h2 className="text-sm font-bold text-green-900 mb-12 border-b border-green-900/10 pb-6 uppercase tracking-widest">{tg.continuity_title}</h2>
+                 <h3 className="text-4xl font-bold tracking-tighter text-green-950 leading-tight mb-12 italic">{tg.continuity_title}</h3>
                  <p className="text-lg text-stone-500 leading-relaxed font-medium mb-12">
-                   Managing health as a strategic asset across diverse legal and clinical territories requires a unified institutional baseline.
+                   {tg.continuity_desc}
                  </p>
               </div>
               <div className="lg:col-span-7 space-y-16 lg:pl-16">
-                 {[
-                    { 
-                      title: 'Jurisdictional Logic', 
-                      desc: 'We operate with full physical residency, ensuring that member data remains within the legal boundaries of the local jurisdiction. This prevents cross-border data seizures.' 
-                    },
-                    { 
-                      title: 'Direct Institutional Management', 
-                      desc: 'No sub-contracting. Every medical officer, technician, and security detail is a direct institutional employee, vetted for loyalty and clinical excellence.' 
-                    },
-                    { 
-                      title: 'Sovereign Physical Stack', 
-                      desc: 'Total ownership of the physical stack. From the custom sequencing arrays to the storage cabinets, we avoid all third-party managed service dependencies.' 
-                    },
-                    {
-                       title: 'Air-Gapped Data Pools',
-                       desc: 'Critical biological repositories are physically isolated from external network influences, requiring multi-signature on-site authorization for access.'
-                    }
-                 ].map((item, i) => (
+                 {tg.principles.map((item: any, i: number) => (
                     <div key={i} className="grid md:grid-cols-3 gap-12 items-start pb-16 border-b border-stone-100 last:border-0">
                        <div className="text-4xl font-bold text-stone-200 tracking-tighter leading-none">{`0${i + 1}`}</div>
                        <div className="md:col-span-2 space-y-4">
@@ -219,16 +206,16 @@ export default function Global({ t }: { t: any }) {
       </section>
 
       {/* New: Physical Security & Fortress Standards */}
-      <section className="py-48 bg-[#fbfcfb] text-left overflow-hidden">
+      <section className="py-48 bg-[#fbfcfb] text-left overflow-hidden border-t border-stone-100">
          <div className="corp-container">
             <div className="grid lg:grid-cols-12 gap-24 items-center">
                <div className="lg:col-span-6 order-2 lg:order-1">
                   <div className="grid grid-cols-2 gap-px bg-stone-200 border border-stone-200 shadow-2xl">
                      {[
-                        { label: 'Security Class', value: 'Level 4-HB' },
-                        { label: 'Power Backup', value: '48H Sovereign' },
-                        { label: 'Air Filtration', value: 'Bio-Surgical' },
-                        { label: 'Response Team', value: 'On-Site 24/7' }
+                        { label: tg.stats.security_class, value: 'Level 4-HB' },
+                        { label: tg.stats.power_backup, value: '48H Sovereign' },
+                        { label: tg.stats.air_filtration, value: 'Bio-Surgical' },
+                        { label: tg.stats.response_team, value: 'On-Site 24/7' }
                      ].map((spec, i) => (
                         <div key={i} className="bg-white p-12 space-y-4">
                            <div className="text-[10px] font-bold text-stone-400 uppercase tracking-widest font-mono">{spec.label}</div>
@@ -238,35 +225,35 @@ export default function Global({ t }: { t: any }) {
                   </div>
                </div>
                <div className="lg:col-span-6 order-1 lg:order-2 space-y-12">
-                  <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 italic">Fortress <br /> Compliance.</h3>
+                  <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 italic">{tg.stats.compliant_title}</h3>
                   <p className="text-lg text-stone-500 leading-relaxed font-medium">
-                     Every Medizer facility is built to institutional fortress standards. We do not rent space; we commission the architecture.
+                     {tg.stats.compliant_desc}
                   </p>
                   <ul className="space-y-6 text-stone-500 font-medium list-none text-lg">
                      <li className="flex gap-4 items-start pb-6 border-b border-stone-100">
                         <Shield className="w-6 h-6 text-green-700 flex-shrink-0" />
-                        <span>Biometric-only access for all clinical and analytical areas.</span>
+                        <span>{tg.stats.biometric}</span>
                      </li>
                      <li className="flex gap-4 items-start pb-6 border-b border-stone-100">
                         <MapPin className="w-6 h-6 text-green-700 flex-shrink-0" />
-                        <span>Jurisdictionally isolated power grids and waste management.</span>
+                        <span>{tg.stats.power_grids}</span>
                      </li>
                      <li className="flex gap-4 items-start">
                         <Building2 className="w-6 h-6 text-green-700 flex-shrink-0" />
-                        <span>Shielded construction to prevent electromagnetic data leakage.</span>
+                        <span>{tg.stats.shielded}</span>
                      </li>
                   </ul>
                </div>
             </div>
             
             <div className="mt-32">
-               <motion.button 
-                 whileHover={{ x: 20 }}
-                 className="flex items-center gap-12 text-3xl font-bold text-green-950 group"
+               <Link 
+                 to="/membership"
+                 className="inline-flex items-center gap-12 text-3xl font-bold text-green-950 group hover:translate-x-4 transition-transform active:scale-95"
                >
-                  <span>Inquiry into Regional Access</span>
+                  <span>{tg.stats.inquiry_button}</span>
                   <ArrowRight className="w-10 h-10 text-green-700 transition-transform" />
-               </motion.button>
+               </Link>
             </div>
          </div>
       </section>

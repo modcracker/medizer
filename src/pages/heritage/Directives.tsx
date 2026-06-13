@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Directives() {
+export default function Directives({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const td = t.directives;
 
   return (
     <div className="bg-[#fbfcfb] overflow-x-hidden">
@@ -28,11 +30,11 @@ export default function Directives() {
           <div className="max-w-[750px] py-20 text-center md:text-left">
             <span className="block mb-6 text-base font-bold text-green-700 inline-flex items-center gap-3">
               <div className="w-8 h-[1px] bg-green-700/30" />
-              Mandate & Core
+              {td.subtitle}
             </span>
-            <h1 className="font-bold text-6xl lg:text-7xl text-green-950 tracking-tighter mb-8 italic">Directives.</h1>
+            <h1 className="font-bold text-6xl lg:text-7xl text-green-950 tracking-tighter mb-8 italic">{td.title}</h1>
             <p className="text-xl text-stone-600 leading-relaxed max-w-[600px] font-medium mx-auto md:mx-0">
-              Institutional guidelines ensuring the perpetuation of high-fidelity biological data and member security across the next century.
+              {td.description}
             </p>
           </div>
         </div>
@@ -41,23 +43,7 @@ export default function Directives() {
       <section className="py-32 corp-container bg-white">
         <div className="max-w-[1000px] mx-auto">
           <div className="grid gap-8 items-start">
-            {[
-              {
-                id: '01',
-                title: 'Preservation of Lineage',
-                desc: 'We prioritize the longitudinal tracking of biological markers across decades, ensuring health trajectories are analyzed within their complete historical context.'
-              },
-              {
-                id: '02',
-                title: 'Analytical Autonomy',
-                desc: 'Medizer reserves all rights to proprietary methodology development, resisting commercial pressure to commoditize individual health snapshots in favor of deep-structure analysis.'
-              },
-              {
-                id: '03',
-                title: 'Discreet Stewardship',
-                desc: 'The network exists as a private utility. We maintain a zero-visibility policy for external queries regarding individual membership or data repositories.'
-              }
-            ].map((directive) => (
+            {td.items.map((directive: any) => (
               <div key={directive.id} className="group relative bg-[#fbfcfb] p-12 border border-stone-100 hover:border-green-700/30 transition-all duration-700">
                 <div className="flex flex-col md:grid md:grid-cols-12 gap-10">
                   <div className="md:col-span-2 text-6xl font-bold text-green-700 opacity-10 tracking-tighter leading-none italic group-hover:opacity-20 transition-opacity">
@@ -76,13 +62,13 @@ export default function Directives() {
 
           <div className="mt-20 flex flex-col md:flex-row items-center gap-12 p-12 bg-green-950 rounded-sm text-white">
             <div className="flex-1 text-center md:text-left">
-              <h4 className="text-2xl font-bold mb-4 tracking-tight italic">Aligned with our mission?</h4>
+              <h4 className="text-2xl font-bold mb-4 tracking-tight italic">{td.cta_title}</h4>
               <p className="text-green-200/70 text-lg leading-relaxed">
-                Membership into the Medizer Network is by institutional invitation or qualified application review.
+                {td.cta_desc}
               </p>
             </div>
             <Link to="/membership" className="bg-green-700 hover:bg-green-600 text-white px-10 py-5 rounded-sm font-bold transition-all shadow-xl shadow-black/20 whitespace-nowrap active:scale-95">
-              Inquire for Access
+              {td.cta_button}
             </Link>
           </div>
         </div>

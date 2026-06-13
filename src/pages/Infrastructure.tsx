@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { MapPin, Zap, Shield, Database, Globe, ArrowRight, Settings, Command } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const networkFacilities = [
   { id: 'CH-ZH-01', city: 'Zurich', type: 'Clinical Laboratory', status: 'Optimal', load: '42%', uptime: '99.999%' },
@@ -14,6 +15,7 @@ export default function Infrastructure({ t }: { t: any }) {
   }, []);
 
   const tc = t.common;
+  const ti = t.infrastructure;
 
   return (
     <div className="bg-[#fbfcfb] text-[#1a1a1a] min-h-screen">
@@ -27,13 +29,13 @@ export default function Infrastructure({ t }: { t: any }) {
                 <span className="text-base font-bold text-green-700">{tc.systems} {tc.architecture}</span>
               </div>
               <h1 className="text-7xl lg:text-9xl font-bold tracking-tighter leading-[0.95] mb-12 text-green-950">
-                Institutional <br />
-                <span className="text-stone-300 italic">{tc.infrastructure}.</span>
+                {ti.title.split(' ')[0]} <br />
+                <span className="text-stone-300 italic">{ti.title.split(' ')[1]}.</span>
               </h1>
             </div>
             <div className="lg:max-w-sm pb-4">
                <p className="text-2xl text-stone-500 font-serif italic leading-relaxed">
-                 "Our physical infrastructure serves as the silent anchor for all biological clinical operations."
+                 {ti.description}
                </p>
             </div>
           </div>
@@ -45,18 +47,13 @@ export default function Infrastructure({ t }: { t: any }) {
         <div className="corp-container">
            <div className="grid lg:grid-cols-2 gap-24 items-center">
               <div>
-                 <h2 className="text-5xl font-bold tracking-tighter text-green-950 mb-8 italic">Precision at Scale.</h2>
+                 <h2 className="text-5xl font-bold tracking-tighter text-green-950 mb-8 italic">{ti.precision_title}</h2>
                  <p className="text-xl text-stone-600 leading-relaxed max-w-xl">
-                   Each facility is a purpose-built environment designed for absolute biological fidelity. We maintain direct control over every tier of our system—from the physical hardware to the regional clinical personnel—ensuring a seamless health trajectory for our members.
+                   {ti.precision_desc}
                  </p>
               </div>
               <div className="grid grid-cols-2 gap-px bg-stone-200 border border-stone-200 shadow-xl">
-                 {[
-                   { label: 'Air Purity', desc: 'Surgical HEPA filtration standards.' },
-                   { label: 'Data Stewardship', desc: 'Tier-4 physical server residency.' },
-                   { label: 'Access Control', desc: 'Vascular biometric protocol.' },
-                   { label: 'Energy Security', desc: 'Redundant power with long-term fuel cells.' }
-                 ].map((spec, i) => (
+                 {ti.specs.map((spec: any, i: number) => (
                    <div key={i} className="bg-white p-10">
                       <h3 className="text-sm font-bold text-green-700 mb-3">{spec.label}</h3>
                       <p className="text-sm text-stone-500 font-medium leading-relaxed">{spec.desc}</p>
@@ -72,19 +69,19 @@ export default function Infrastructure({ t }: { t: any }) {
         <div className="corp-container">
            <div className="flex flex-col md:flex-row justify-between items-baseline mb-20 gap-8">
               <div className="max-w-xl">
-                 <h2 className="text-5xl font-bold tracking-tighter text-green-950 italic">Facility Registry.</h2>
+                 <h2 className="text-5xl font-bold tracking-tighter text-green-950 italic">{ti.registry_title}</h2>
               </div>
-              <span className="text-sm font-semibold text-stone-400">Global Operations Registry</span>
+              <span className="text-sm font-semibold text-stone-400">{ti.registry_subtitle}</span>
            </div>
            
            <div className="overflow-x-auto">
               <table className="w-full text-left">
                  <thead>
                     <tr className="border-b border-stone-200 text-sm font-medium text-stone-400">
-                       <th className="py-6 pr-6">Location</th>
-                       <th className="py-6 px-6">Classification</th>
-                       <th className="py-6 px-6">Status</th>
-                       <th className="py-6 pl-6 text-right">Jurisdiction</th>
+                       <th className="py-6 pr-6">{ti.table.location}</th>
+                       <th className="py-6 px-6">{ti.table.classification}</th>
+                       <th className="py-6 px-6">{ti.table.status}</th>
+                       <th className="py-6 pl-6 text-right">{ti.table.jurisdiction}</th>
                     </tr>
                  </thead>
                  <tbody className="text-stone-800">
@@ -115,11 +112,15 @@ export default function Infrastructure({ t }: { t: any }) {
         <div className="corp-container max-w-4xl mx-auto text-center">
            <Command className="w-12 h-12 text-green-700/20 mx-auto mb-12" />
            <h2 className="text-5xl lg:text-7xl font-bold tracking-tighter text-green-950 leading-[1.05] mb-12">
-             Privacy through <br /> <span className="italic text-stone-300">Physical Isolation.</span>
+             {ti.closing_title} <br /> <span className="italic text-stone-300">{ti.closing_subtitle}</span>
            </h2>
-           <p className="text-2xl text-stone-500 font-serif italic max-w-2xl mx-auto leading-relaxed">
-             "We achieve absolute security by removing clinical data from the cloud entirely. Your biological record resides within our walls, and nowhere else."
+           <p className="text-2xl text-stone-500 font-serif italic max-w-2xl mx-auto leading-relaxed mb-16">
+             {ti.closing_quote}
            </p>
+           <Link to="/heritage/directives" className="inline-flex items-center gap-8 text-2xl font-bold text-green-700 group hover:translate-x-4 transition-all active:scale-95">
+             <span>Institutional Archive</span>
+             <ArrowRight className="w-8 h-8 group-hover:translate-x-4 transition-transform" />
+           </Link>
         </div>
       </section>
     </div>

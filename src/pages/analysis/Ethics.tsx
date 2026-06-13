@@ -8,6 +8,8 @@ export default function Ethics({ t }: { t: any }) {
     window.scrollTo(0, 0);
   }, []);
 
+  const te = t.ethicsPage;
+
   return (
     <div className="bg-white min-h-screen font-sans selection:bg-green-100 selection:text-green-900">
       {/* Institutional Page Hero */}
@@ -21,7 +23,7 @@ export default function Ethics({ t }: { t: any }) {
                    transition={{ duration: 0.8 }}
                    className="mb-8"
                  >
-                   <span className="text-sm font-bold text-green-700 uppercase tracking-widest">Protocol // Section 04</span>
+                   <span className="text-sm font-bold text-green-700 uppercase tracking-widest">{te.subtitle}</span>
                  </motion.div>
                  <motion.h1 
                     initial={{ opacity: 0, y: 30 }}
@@ -29,8 +31,8 @@ export default function Ethics({ t }: { t: any }) {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-6xl lg:text-8xl font-bold tracking-tighter leading-none mb-12 italic text-green-950"
                  >
-                    Ethics <br />
-                    <span className="text-stone-200 not-italic">Protocol.</span>
+                    {te.title.split(' ')[0]} <br />
+                    <span className="text-stone-200 not-italic">{te.title.split(' ')[1]}</span>
                  </motion.h1>
                  <motion.p 
                    initial={{ opacity: 0, y: 20 }}
@@ -38,7 +40,7 @@ export default function Ethics({ t }: { t: any }) {
                    transition={{ duration: 0.8, delay: 0.4 }}
                    className="text-xl text-stone-600 leading-relaxed max-w-2xl font-serif italic"
                  >
-                    "Governing the acquisition and stewardship of biological intelligence through a framework of sovereign individual rights."
+                    {te.description}
                  </motion.p>
               </div>
            </div>
@@ -51,36 +53,19 @@ export default function Ethics({ t }: { t: any }) {
 
       {/* principles section remains similar but I will add more detail after it */}
 
-      {/* New: The Clinical Guardrails Section */}
+      {/* The Clinical Guardrails Section */}
       <section className="py-48 bg-white border-y border-stone-100 text-left">
          <div className="corp-container">
             <div className="max-w-4xl mb-32">
-               <h2 className="text-sm font-bold text-green-900 mb-8 border-b border-green-900/10 pb-4 uppercase tracking-widest">Enforced Constraints</h2>
-               <h3 className="text-5xl lg:text-6xl font-bold tracking-tighter text-green-950 leading-tight mb-12 italic">The Guardrails.</h3>
+               <h2 className="text-sm font-bold text-green-900 mb-8 border-b border-green-900/10 pb-4 uppercase tracking-widest">{te.enforced_constraints}</h2>
+               <h3 className="text-5xl lg:text-6xl font-bold tracking-tighter text-green-950 leading-tight mb-12 italic">{te.guardrails_title}</h3>
                <p className="text-xl text-stone-500 font-serif italic leading-relaxed">
-                  The Medizer Ethics Protocol is backed by technical countermeasures that prevent the violation of our core directives. Our silicon-level security ensures that these rules are immutable.
+                  {te.guardrails_desc}
                </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-24">
-               {[
-                  {
-                     title: 'Absolute Non-Commerciality',
-                     desc: 'At no point, for any reason, is member biological data ever provided to third-party commercial interests. Our revenue is derived from membership, not data arbitrage.'
-                  },
-                  {
-                     title: 'Mandatory Disclosure',
-                     desc: 'Any shift in the analytical baseline or synthesis logic is disclosed to the membership board 90 days prior to activation.'
-                  },
-                  {
-                     title: 'Biological Sanctity',
-                     desc: 'No biological data is used for speculative "enhancement" modeling without the explicit, jurisdictional consent of the individual member.'
-                  },
-                  {
-                     title: 'The Perpetual Archive',
-                     desc: 'Members have the right to migrate their data to secondary cold-storage tiers beyond our active synthesis environment at any time.'
-                  }
-               ].map((guard, i) => (
+               {te.guardrails.map((guard: any, i: number) => (
                   <div key={i} className="space-y-6">
                      <div className="text-sm font-bold text-green-700 font-mono tracking-widest">{`[ CONSTRAINT_0${i + 1} ]`}</div>
                      <h4 className="text-3xl font-bold text-green-950 tracking-tight italic">{guard.title}.</h4>
@@ -91,40 +76,24 @@ export default function Ethics({ t }: { t: any }) {
          </div>
       </section>
 
-      {/* New: Governance Structures Section */}
+      {/* Governance Structures Section */}
       <section className="py-48 bg-[#fbfcfb] text-left overflow-hidden">
          <div className="corp-container">
             <div className="grid lg:grid-cols-12 gap-24 items-start">
                <div className="lg:col-span-5">
-                  <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 italic mb-12 leading-tight">Institutional <br /> Oversight Tiers.</h3>
+                  <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 italic mb-12 leading-tight">{te.governance_title}</h3>
                   <p className="text-lg text-stone-500 leading-relaxed font-medium">
-                     Transparency is maintained through a three-tier governance model, separating clinical operations from ethical adjudication.
+                     {te.governance_desc}
                   </p>
                </div>
                <div className="lg:col-span-7 space-y-16">
-                  {[
-                     {
-                        tier: 'Tier 1 // Institutional Board',
-                        role: 'Direct oversight of day-to-day clinical operations and global synthesis fidelity.',
-                        composition: 'Internal Senior Clinicians'
-                     },
-                     {
-                        tier: 'Tier 2 // The Council of Directives',
-                        role: 'High-level auditing of the core protocols and long-term ethical trajectory.',
-                        composition: 'Bio-ethicists & Legal Scholars'
-                     },
-                     {
-                        tier: 'Tier 3 // Independent Tribunal',
-                        role: 'External adjudication of membership rights and jurisdictional compliance disputes.',
-                        composition: 'Independent 3rd Party Observers'
-                     }
-                  ].map((tier, i) => (
+                  {te.tiers.map((tier: any, i: number) => (
                      <div key={i} className="grid md:grid-cols-12 gap-12 items-start group">
                         <div className="md:col-span-1 text-2xl font-bold text-stone-200 group-hover:text-green-700 transition-colors">{`0${i + 1}`}</div>
                         <div className="md:col-span-11 space-y-4">
                            <h4 className="text-2xl font-bold text-green-950 tracking-tight italic">{tier.tier}.</h4>
                            <p className="text-lg text-stone-500 leading-relaxed font-medium">{tier.role}</p>
-                           <div className="text-sm font-bold text-green-900/50 uppercase tracking-widest">{`COMPOSITION: ${tier.composition}`}</div>
+                           <div className="text-sm font-bold text-green-900/50 uppercase tracking-widest">{`COMPOSITION: ${tier.comp || tier.composition}`}</div>
                         </div>
                      </div>
                   ))}
@@ -138,22 +107,22 @@ export default function Ethics({ t }: { t: any }) {
         <div className="corp-container">
            <div className="grid lg:grid-cols-2 gap-32 items-center">
               <div className="space-y-12">
-                 <h2 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 leading-tight italic">Institutional <br /> Verification.</h2>
+                 <h2 className="text-4xl lg:text-5xl font-bold tracking-tighter text-green-950 leading-tight italic">{te.verification_title}</h2>
                  <p className="text-xl text-stone-500 leading-relaxed font-serif italic py-4">
-                    Medizer operates under strict bio-ethical frameworks established at our Geneva foundation. Our protocols are subject to bi-annual review by independent scholars.
+                    {te.verification_desc}
                  </p>
                  <div className="flex flex-col gap-6 pt-12">
                    <div className="flex items-center gap-6">
                       <div className="w-12 h-12 rounded-sm bg-[#fbfcfb] border border-stone-100 flex items-center justify-center text-green-700">
                         <FileText className="w-6 h-6" />
                       </div>
-                      <span className="text-lg font-bold text-green-950">Ethical Audit Report 2024.pdf</span>
+                      <span className="text-lg font-bold text-green-950">{te.audit_report}</span>
                    </div>
                    <div className="flex items-center gap-6">
                       <div className="w-12 h-12 rounded-sm bg-[#fbfcfb] border border-stone-100 flex items-center justify-center text-green-700">
                         <Eye className="w-6 h-6" />
                       </div>
-                      <span className="text-lg font-bold text-green-950">Transparency Manifesto</span>
+                      <span className="text-lg font-bold text-green-950">{te.manifesto}</span>
                    </div>
                  </div>
               </div>
@@ -164,14 +133,14 @@ export default function Ethics({ t }: { t: any }) {
                     </div>
                     <div className="relative z-10 space-y-12 text-left">
                        <div className="space-y-4">
-                          <div className="text-xs font-bold text-stone-400 uppercase tracking-widest font-mono">Governing Body</div>
-                          <h3 className="text-3xl lg:text-4xl font-bold text-green-950 tracking-tighter italic leading-none">The Council of Directives.</h3>
+                          <div className="text-xs font-bold text-stone-400 uppercase tracking-widest font-mono">{te.subtitle}</div>
+                          <h3 className="text-3xl lg:text-4xl font-bold text-green-950 tracking-tighter italic leading-none">{te.council_title}</h3>
                        </div>
                        <p className="text-lg text-stone-500 leading-relaxed font-medium">
-                          Our Council ensures that the institution remains faithful to its founding mandate while adapting to emergent biological technologies.
+                          {te.council_desc}
                        </p>
                        <Link to="/membership" className="inline-flex items-center gap-8 text-xl font-bold text-green-700 group">
-                          <span>Request Institutional Review</span>
+                          <span>{te.request_review}</span>
                           <ArrowRight className="w-6 h-6 group-hover:translate-x-4 transition-transform" />
                        </Link>
                     </div>

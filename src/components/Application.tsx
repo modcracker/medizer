@@ -8,22 +8,46 @@ export default function Application({ t }: { t: any }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!db) {
-      setStatus('error');
-      return;
-    }
     setStatus('submitting');
+
+    // Attempt to send email via server API
     try {
-      await addDoc(collection(db, 'leads'), {
-        ...formData,
-        status: 'pending',
-        createdAt: serverTimestamp()
+      const emailResponse = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          subject: "New Membership Application",
+          message: `Bio/Background: ${formData.bio}\nReference: ${formData.reference}`
+        }),
       });
-      setStatus('success');
-    } catch (error) {
-      console.error("Error adding lead:", error);
-      setStatus('error');
+      
+      const emailResult = await emailResponse.json();
+      if (!emailResponse.ok && !db) {
+        throw new Error(emailResult.error || "Institutional transmission failure.");
+      }
+    } catch (err) {
+      console.error("Email send error:", err);
+      if (!db) {
+        setStatus('error');
+        return;
+      }
     }
+
+    // Save to Firebase as audit trail if available
+    if (db) {
+      try {
+        await addDoc(collection(db, 'leads'), {
+          ...formData,
+          status: 'pending',
+          createdAt: serverTimestamp()
+        });
+      } catch (error) {
+        console.error("Error adding lead to Firestore:", error);
+      }
+    }
+
+    setStatus('success');
   };
 
   if (status === 'success') {
@@ -59,15 +83,15 @@ export default function Application({ t }: { t: any }) {
             </p>
             {status === 'error' && (
               <div className="p-6 bg-red-50 border border-red-100 rounded-sm mb-12">
-                <p className="text-sm font-bold text-red-800 tracking-tight mb-2 uppercase">System Error</p>
+                <p className="text-sm font-bold text-red-800 tracking-tight mb-2 uppercase">{t.systemError || 'System Error'}</p>
                 <p className="text-xs text-red-600 leading-relaxed font-medium">
-                  We encountered an issue processing your request. Please ensure you are connected to the network or try again later.
+                  {t.systemErrorDesc || 'We encountered an issue processing your request. Please ensure you are connected to the network or try again later.'}
                 </p>
               </div>
             )}
             <div className="flex items-center gap-4">
                <div className="w-12 h-[1px] bg-stone-200" />
-               <span className="text-sm font-medium text-stone-400">All inquiries undergo clinical review.</span>
+               <span className="text-sm font-medium text-stone-400">{t.reviewText || 'All inquiries undergo clinical review.'}</span>
             </div>
           </div>
 

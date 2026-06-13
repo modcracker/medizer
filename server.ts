@@ -18,7 +18,7 @@ async function startServer() {
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
     const fromEmail = process.env.FROM_EMAIL || smtpUser;
-    const toEmail = process.env.TO_EMAIL || smtpUser;
+    const toEmail = process.env.TO_EMAIL || "info@medizer.com";
 
     if (!smtpHost || !smtpUser || !smtpPass) {
       console.error("Missing SMTP configuration");

@@ -82,9 +82,9 @@ export default function GlobalNetwork({ t }: { t: any }) {
               } ${facility.size === 'md' ? 'lg:col-span-2' : ''}`}
             >
               <div className="absolute top-6 right-6 z-20">
-                <div className="w-12 h-12 bg-white/90 backdrop-blur-md rounded-sm border border-stone-100 flex items-center justify-center group-hover:bg-green-700 group-hover:text-white transition-all duration-500 cursor-pointer">
+                <Link to="/network/global" className="w-12 h-12 bg-white/90 backdrop-blur-md rounded-sm border border-stone-100 flex items-center justify-center group-hover:bg-green-700 group-hover:text-white transition-all duration-500 cursor-pointer">
                   <ArrowUpRight className="w-5 h-5" />
-                </div>
+                </Link>
               </div>
 
               <div className={`relative overflow-hidden ${facility.size === 'lg' ? 'flex-grow h-full' : 'aspect-square lg:aspect-auto h-[240px]'}`}>

@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
@@ -32,13 +32,106 @@ import { seedContent } from './services/firebase';
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('English');
   const t = translations[currentLang];
+  const location = useLocation();
 
   useEffect(() => {
     seedContent();
   }, []);
 
+  // Dynamic SEO Meta Tags
+  useEffect(() => {
+    const getPageMeta = (pathname: string) => {
+      switch (pathname) {
+        case '/':
+          return { title: t.hero.title, description: t.hero.description };
+        case '/network':
+        case '/infrastructure':
+          return { title: `${t.infrastructure.title} | ${t.infrastructure.subtitle}`, description: t.infrastructure.description };
+        case '/network/global':
+          return { title: t.globalNetwork.title, description: t.globalNetwork.description };
+        case '/network/monitoring':
+          return { title: `${t.monitoring.title} | ${t.monitoring.subtitle}`, description: t.monitoring.description };
+        case '/analysis':
+        case '/intelligence':
+          return { title: `${t.intelligencePage.title} | ${t.intelligencePage.subtitle}`, description: t.intelligencePage.description };
+        case '/analysis/core':
+          return { title: `${t.corePage.title} | ${t.corePage.subtitle}`, description: t.corePage.description };
+        case '/analysis/ethics':
+          return { title: `${t.ethicsPage.title} | ${t.ethicsPage.subtitle}`, description: t.ethicsPage.description };
+        case '/heritage':
+        case '/institutional':
+          return { title: `${t.heritage.title} | ${t.heritage.subtitle}`, description: t.heritage.description };
+        case '/heritage/ethos':
+          return { title: t.heritage.ethos_title, description: t.heritage.ethos_quote };
+        case '/heritage/directives':
+          return { title: `${t.directives.title} | ${t.directives.subtitle}`, description: t.directives.description };
+        case '/heritage/review':
+          return { title: `${t.review.title} | ${t.review.subtitle}`, description: t.review.description };
+        case '/heritage/governance/board':
+          return { title: `${t.board.title} | ${t.board.subtitle}`, description: t.board.description };
+        case '/heritage/governance/rights':
+          return { title: `${t.rights.title} | ${t.rights.subtitle}`, description: t.rights.description };
+        case '/support':
+        case '/liaison':
+          return { title: t.support.hero_title, description: t.support.hero_desc };
+        case '/membership':
+        case '/apply':
+          return { title: t.membership.hero_title, description: t.membership.hero_desc };
+        case '/access':
+          return { title: `${t.accessPortal.title} | ${t.accessPortal.subtitle}`, description: t.accessPortal.description };
+        default:
+          return { title: 'Medizer | Sovereign Healthcare', description: 'Institutional biological monitoring and sovereign health management.' };
+      }
+    };
+
+    const { title, description } = getPageMeta(location.pathname);
+    
+    // Update Document Title
+    document.title = `Medizer | ${title}`;
+    
+    // Update Meta Description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', description);
+    } else {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      metaDescription.setAttribute('content', description);
+      document.head.appendChild(metaDescription);
+    }
+
+    // Update Open Graph tags for better social sharing
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', `Medizer | ${title}`);
+    
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) ogDescription.setAttribute('content', description);
+
+  }, [location.pathname, t]);
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Sale Notice Banner */}
+      <a 
+        href="https://www.godaddy.com/domainsearch/find?domainToCheck=medizer.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="w-full bg-amber-500 border-b border-amber-600 block hover:bg-amber-450 transition-all z-50 relative"
+      >
+        <div className="max-w-7xl mx-auto py-5 px-6 flex flex-col md:flex-row items-center justify-center gap-6 text-stone-950">
+          <div className="flex items-center gap-3 justify-center text-center">
+            <span className="inline-block w-3 h-3 rounded-full bg-stone-950 animate-pulse shrink-0" />
+            <span className="font-mono font-black tracking-tight text-lg md:text-2xl uppercase leading-tight">
+              DUE TO UNFORESEEN CIRCUMSTANCES MEDIZER.COM IS FOR SALE AT GODADDY.COM
+            </span>
+            <span className="inline-block w-3 h-3 rounded-full bg-stone-950 animate-pulse shrink-0" />
+          </div>
+          <span className="inline-flex items-center gap-2 bg-stone-950 text-amber-500 hover:bg-stone-900 font-extrabold text-xs md:text-sm uppercase px-5 py-2.5 rounded-sm hover:scale-[1.03] active:scale-95 transition-all shadow-md shrink-0 font-mono">
+            BUY ON GODADDY
+            <span>→</span>
+          </span>
+        </div>
+      </a>
       <Navbar currentLang={currentLang} onLangChange={setCurrentLang} />
       <main>
         <Routes>
@@ -75,7 +168,7 @@ export default function App() {
           <Route path="/apply" element={<Membership t={t} />} />
         </Routes>
       </main>
-      <Footer t={t.footer} />
+      <Footer t={t} />
     </div>
   );
 }

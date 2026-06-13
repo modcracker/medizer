@@ -14,6 +14,20 @@
       },
       "required": ["email", "name", "createdAt", "status"]
     },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "Institutional liaison or support inquiry.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["unread", "in-review", "resolved", "dismissed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "name", "message", "createdAt", "status"]
+    },
     "SearchableContent": {
       "title": "SearchableContent",
       "description": "Index of content available for search.",
@@ -36,6 +50,10 @@
     "leads/{leadId}": {
       "schema": "Lead",
       "description": "Store application leads for the exclusive network."
+    },
+    "support_tickets/{ticketId}": {
+      "schema": "SupportTicket",
+      "description": "Store support and liaison inquiries."
     }
   }
 }

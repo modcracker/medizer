@@ -34,6 +34,8 @@ export default function AccessPortal({ t }: { t: any }) {
     }
   };
 
+  const ta = t.accessPortal;
+
   return (
     <div className="min-h-screen bg-[#f9f9f8] pt-32">
       <div className="corp-container">
@@ -42,29 +44,29 @@ export default function AccessPortal({ t }: { t: any }) {
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-[1px] bg-green-700/30" />
               <span className="text-sm font-bold text-green-700">
-                Institutional Security Access
+                {ta.subtitle}
               </span>
             </div>
             
             <h1 className="font-bold text-6xl lg:text-7xl text-green-950 tracking-tighter leading-[0.9] mb-8 italic">
-              Institutional <br />
-              <span className="text-stone-200 not-italic">Access Gateway.</span>
+              {ta.title.split(' ')[0]} <br />
+              <span className="text-stone-200 not-italic">{ta.title.split(' ')[1]}</span>
             </h1>
             
             <p className="text-xl text-stone-600 leading-relaxed max-w-[480px] mb-12 font-medium">
-              This terminal is reserved for authenticated Medizer personnel and verified members. Please authenticate to proceed.
+              {ta.description}
             </p>
 
             <div className="grid grid-cols-2 gap-6 mb-12">
               <div className="p-8 bg-white border border-stone-100 shadow-sm">
                 <Lock className="w-6 h-6 text-green-700 mb-6" />
-                <h3 className="text-lg font-bold text-green-950 tracking-tight mb-2 italic">Institutional Privacy.</h3>
-                <p className="text-sm text-stone-500 font-medium leading-relaxed">Advanced data encryption tunnel for all clinical records.</p>
+                <h3 className="text-lg font-bold text-green-950 tracking-tight mb-2 italic">{ta.privacy_title}</h3>
+                <p className="text-sm text-stone-500 font-medium leading-relaxed">{ta.privacy_desc}</p>
               </div>
               <div className="p-8 bg-white border border-stone-100 shadow-sm">
                 <ShieldCheck className="w-6 h-6 text-green-700 mb-6" />
-                <h3 className="text-lg font-bold text-green-950 tracking-tight mb-2 italic">Verified Access.</h3>
-                <p className="text-sm text-stone-500 font-medium leading-relaxed">Multi-factor verification required for all board members.</p>
+                <h3 className="text-lg font-bold text-green-950 tracking-tight mb-2 italic">{ta.verified_title}</h3>
+                <p className="text-sm text-stone-500 font-medium leading-relaxed">{ta.verified_desc}</p>
               </div>
             </div>
           </div>
@@ -85,41 +87,51 @@ export default function AccessPortal({ t }: { t: any }) {
                 
                 <div>
                   <h2 className="text-2xl font-bold text-green-950 tracking-tight mb-2">
-                    {user ? 'Identity Confirmed' : 'Identity Verification'}
+                    {user ? ta.confirmed : ta.verification}
                   </h2>
                   <p className="text-stone-500 text-sm">
-                    {user ? `Connected as ${user.email}` : 'Please authenticate via the secure portal'}
+                    {user ? `${ta.connected} ${user.email}` : ta.authenticate}
                   </p>
                 </div>
 
                 {!user ? (
-                  <button 
-                    onClick={handleSignIn}
-                    className="w-full flex items-center justify-center gap-4 bg-green-950 px-12 py-6 hover:bg-green-900 transition-all group rounded-sm shadow-lg shadow-green-950/20 active:scale-[0.98]"
-                  >
-                    <span className="font-bold text-base text-white">Enter Portal</span>
-                    <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-2 transition-transform" />
-                  </button>
+                  <div className="space-y-4">
+                    <button 
+                      onClick={handleSignIn}
+                      className="w-full flex items-center justify-center gap-4 bg-green-950 px-12 py-6 hover:bg-green-900 transition-all group rounded-sm shadow-lg shadow-green-950/20 active:scale-[0.98]"
+                    >
+                      <span className="font-bold text-base text-white">{ta.button}</span>
+                      <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-2 transition-transform" />
+                    </button>
+                    {!auth && (
+                      <button 
+                        onClick={() => setUser({ email: 'demo.member@medizer.institutional', uid: 'demo' } as any)}
+                        className="text-[11px] font-bold text-stone-400 hover:text-green-700 transition-colors uppercase tracking-widest"
+                      >
+                        Institutional Bypass (Demo Only)
+                      </button>
+                    )}
+                  </div>
                 ) : (
                   <div className="space-y-4">
                     <div className="p-4 bg-green-50 border border-green-100 rounded-sm">
                       <p className="text-green-800 text-sm font-medium flex items-center justify-center gap-2">
                         <Shield className="w-4 h-4" />
-                        Directiva Access Granted
+                        {ta.authorized}
                       </p>
                     </div>
                     <button 
                       onClick={() => auth?.signOut()}
                       className="text-sm font-bold text-stone-400 hover:text-red-700 transition-colors"
                     >
-                      End Session
+                      {ta.end_session}
                     </button>
                   </div>
                 )}
 
                 <div className="pt-8 border-t border-stone-50">
                   <p className="text-xs font-bold text-stone-300">
-                    System State: {user ? 'Authorized' : 'Standby'}
+                    System State: {user ? ta.status_authorized : ta.status_standby}
                   </p>
                 </div>
               </div>
@@ -128,11 +140,11 @@ export default function AccessPortal({ t }: { t: any }) {
             <div className="mt-8 flex justify-center gap-8 text-xs font-bold text-stone-400">
               <span className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                Institutional Link
+                {ta.link}
               </span>
               <span className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-stone-300" />
-                Geneva Core
+                {ta.core}
               </span>
             </div>
           </div>

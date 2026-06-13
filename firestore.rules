@@ -30,8 +30,25 @@ service cloud.firestore {
              data.createdAt == request.time;
     }
 
+    // Support ticket validation
+    function isValidSupportTicket(data) {
+      return data.keys().hasAll(['email', 'name', 'subject', 'message', 'status', 'createdAt']) &&
+             data.keys().size() == 6 &&
+             data.email is string && data.email.size() <= 200 &&
+             data.name is string && data.name.size() <= 100 &&
+             data.subject is string && data.subject.size() <= 200 &&
+             data.message is string && data.message.size() <= 2000 &&
+             data.status == 'unread' &&
+             data.createdAt == request.time;
+    }
+
     match /leads/{leadId} {
       allow create: if isValidId(leadId) && isValidLead(incoming());
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /support_tickets/{ticketId} {
+      allow create: if isValidId(ticketId) && isValidSupportTicket(incoming());
       allow read, update, delete: if isAdmin();
     }
 

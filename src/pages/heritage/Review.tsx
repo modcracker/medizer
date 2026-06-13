@@ -2,18 +2,12 @@ import React, { useEffect } from 'react';
 import { ArrowRight, History } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Review() {
+export default function Review({ t }: { t: any }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const milestones = [
-    { year: '1926', title: 'Foundation', desc: 'Established in Geneva as a private data repository for longitudinal research.' },
-    { year: '1954', title: 'The Zurich Accord', desc: 'Codification of member privacy rights and data stewardship protocols.' },
-    { year: '1982', title: 'Network Expansion', desc: 'Activation of secondary facilities in Singapore and New York.' },
-    { year: '2008', title: 'Bio-Digital Shift', desc: 'Transition of all physical records to encrypted sovereign digital architecture.' },
-    { year: '2024', title: 'Century Milestone', desc: 'Approaching 100 years of uninterrupted biological data preservation.' }
-  ];
+  const tr = t.review;
 
   return (
     <div className="bg-[#fbfcfb] overflow-x-hidden">
@@ -35,11 +29,11 @@ export default function Review() {
           <div className="max-w-[750px] py-20 text-center md:text-left">
             <span className="block mb-6 text-base font-bold text-green-700 inline-flex items-center gap-3">
               <div className="w-8 h-[1px] bg-green-700/30" />
-              Retrospective & Archive
+              {tr.subtitle}
             </span>
-            <h1 className="font-bold text-6xl lg:text-7xl text-green-950 tracking-tighter mb-8 italic">Century Review.</h1>
+            <h1 className="font-bold text-6xl lg:text-7xl text-green-950 tracking-tighter mb-8 italic">{tr.title}</h1>
             <p className="text-xl text-stone-600 leading-relaxed max-w-[600px] font-medium mx-auto md:mx-0">
-              A chronological analysis of the Medizer impact on institutional health management and biological data integrity since 1926.
+              {tr.description}
             </p>
           </div>
         </div>
@@ -48,7 +42,7 @@ export default function Review() {
       <section className="py-32 corp-container bg-white">
         <div className="max-w-[1000px] mx-auto">
           <div className="relative border-l border-stone-200 ml-4 md:ml-12 pl-12 space-y-32">
-            {milestones.map((m, i) => (
+            {tr.milestones.map((m: any, i: number) => (
               <div key={i} className="relative group">
                 <div className="absolute -left-[53px] top-0 w-2.5 h-2.5 bg-green-700 rounded-full ring-8 ring-white group-hover:ring-green-700/10 transition-all duration-500" />
                 
@@ -71,9 +65,9 @@ export default function Review() {
 
           <div className="mt-40 pt-20 border-t border-stone-100 text-center">
             <Link to="/membership" className="inline-flex flex-col items-center group">
-              <span className="text-stone-400 text-sm mb-4 font-bold tracking-tight">The Future of Sovereignty</span>
+              <span className="text-stone-400 text-sm mb-4 font-bold tracking-tight">{tr.footer_tag}</span>
               <span className="text-4xl font-bold text-green-950 tracking-tighter group-hover:text-green-700 transition-colors italic">
-                Secure your lineage today.
+                {tr.footer_title}
               </span>
               <div className="mt-8 w-12 h-12 bg-green-700 rounded-sm flex items-center justify-center transform group-hover:scale-110 transition-transform">
                 <ArrowRight className="w-5 h-5 text-white" />

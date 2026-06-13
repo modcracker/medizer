@@ -33,6 +33,7 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
   
   const navigate = useNavigate();
   const t = translations[currentLang].common;
+  const tm = t.megamenu;
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = (menuId: string) => {
@@ -144,25 +145,25 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
                   >
                     <div className="w-[600px] bg-white border border-stone-100 shadow-2xl rounded-sm overflow-hidden flex">
                       <div className="w-1/3 bg-[#fbfcfb] p-10 border-r border-stone-100">
-                        <div className="text-sm font-bold text-green-700 mb-6 tracking-tight">Institutional Network</div>
+                        <div className="text-sm font-bold text-green-700 mb-6 tracking-tight">{tm.infra_title}</div>
                         <p className="text-stone-500 text-xs leading-relaxed font-serif italic">
-                          "Institutional Geography and Systems Assurance."
+                          {tm.infra_desc}
                         </p>
                       </div>
                       <div className="w-2/3 p-10 grid grid-cols-2 gap-10">
                         <Link to="/network/global" className="group block">
                           <div className="flex items-center gap-3 mb-3">
                              <Globe className="w-4 h-4 text-green-700" />
-                             <span className="text-green-950 group-hover:text-green-700 transition-colors font-bold text-sm tracking-tight capitalize">Continental Reach</span>
+                             <span className="text-green-950 group-hover:text-green-700 transition-colors font-bold text-sm tracking-tight capitalize">{tm.global_title}</span>
                           </div>
-                          <p className="text-xs text-stone-500 leading-relaxed font-medium">Jurisdictional clinical presence across established global territories.</p>
+                          <p className="text-xs text-stone-500 leading-relaxed font-medium">{tm.global_desc}</p>
                         </Link>
                         <Link to="/network/monitoring" className="group block">
                           <div className="flex items-center gap-3 mb-3">
                              <Activity className="w-4 h-4 text-green-700" />
-                             <span className="text-green-950 group-hover:text-green-700 transition-colors font-bold text-sm tracking-tight capitalize">Systems Oversight</span>
+                             <span className="text-green-950 group-hover:text-green-700 transition-colors font-bold text-sm tracking-tight capitalize">{tm.monitoring_title}</span>
                           </div>
-                          <p className="text-xs text-stone-500 leading-relaxed font-medium">Continuous administrative and clinical fidelity assurance protocols.</p>
+                          <p className="text-xs text-stone-500 leading-relaxed font-medium">{tm.monitoring_desc}</p>
                         </Link>
                       </div>
                     </div>
@@ -196,11 +197,11 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
                     <div className="w-56 bg-white border border-stone-100 shadow-xl rounded-sm py-2">
                       <Link to="/analysis/core" className="flex items-center gap-3 px-6 py-3 hover:bg-stone-50 group">
                         <Cpu className="w-3.5 h-3.5 text-stone-400 group-hover:text-green-700 transition-colors" />
-                        <span className="text-stone-600 group-hover:text-green-950 transition-colors">Digital Analysis</span>
+                        <span className="text-stone-600 group-hover:text-green-950 transition-colors">{tm.analysis_digital}</span>
                       </Link>
                       <Link to="/analysis/ethics" className="flex items-center gap-3 px-6 py-3 hover:bg-stone-50 group">
                         <Scale className="w-3.5 h-3.5 text-stone-400 group-hover:text-green-700 transition-colors" />
-                        <span className="text-stone-600 group-hover:text-green-950 transition-colors">Review Protocol</span>
+                        <span className="text-stone-600 group-hover:text-green-950 transition-colors">{tm.analysis_review}</span>
                       </Link>
                     </div>
                   </motion.div>
@@ -232,7 +233,7 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
                   >
                     <div className="w-[800px] bg-white border border-stone-100 shadow-2xl rounded-sm overflow-hidden flex">
                       <div className="w-1/4 bg-stone-900 text-white p-8">
-                        <div className="text-sm font-bold text-green-500 mb-6">About</div>
+                        <div className="text-sm font-bold text-green-500 mb-6">{t.institutional}</div>
                         <div className="space-y-6">
                            <div>
                              <div className="text-xl font-bold tracking-tight text-white italic">1926</div>
@@ -240,24 +241,24 @@ export default function Navbar({ currentLang, onLangChange }: NavbarProps) {
                            </div>
                            <div className="h-[1px] w-full bg-stone-800" />
                            <p className="text-xs text-stone-400 leading-relaxed">
-                             Ensuring medical excellence for nearly a century.
+                             {tm.heritage_tag}
                            </p>
                         </div>
                       </div>
                       <div className="w-3/4 p-10 grid grid-cols-3 gap-12">
                         <div>
-                          <h4 className="text-sm font-bold text-stone-400 mb-6 tracking-tight">Institutional Records</h4>
+                          <h4 className="text-sm font-bold text-stone-400 mb-6 tracking-tight">{tm.heritage_records}</h4>
                           <ul className="space-y-4 text-sm font-medium">
-                            <li><Link to="/heritage/ethos" className="text-stone-600 hover:text-green-700 block transition-colors">Philosophy</Link></li>
-                            <li><Link to="/heritage/directives" className="text-stone-600 hover:text-green-700 block transition-colors">Directives</Link></li>
-                            <li><Link to="/heritage/review" className="text-stone-600 hover:text-green-700 block transition-colors">Review</Link></li>
+                            <li><Link to="/heritage/ethos" className="text-stone-600 hover:text-green-700 block transition-colors">{translations[currentLang].ethicsPage.title || 'Philosophy'}</Link></li>
+                            <li><Link to="/heritage/directives" className="text-stone-600 hover:text-green-700 block transition-colors">{translations[currentLang].directives.title || 'Directives'}</Link></li>
+                            <li><Link to="/heritage/review" className="text-stone-600 hover:text-green-700 block transition-colors">{translations[currentLang].review.title || 'Review'}</Link></li>
                           </ul>
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold text-stone-400 mb-6 tracking-tight">Administrative Board</h4>
+                          <h4 className="text-sm font-bold text-stone-400 mb-6 tracking-tight">{tm.heritage_board}</h4>
                           <ul className="space-y-4 text-sm font-medium">
-                            <li><Link to="/heritage/governance/board" className="text-stone-600 hover:text-green-700 block transition-colors">Medical Board</Link></li>
-                            <li><Link to="/heritage/governance/rights" className="text-stone-600 hover:text-green-700 block transition-colors">Privacy Rights</Link></li>
+                            <li><Link to="/heritage/governance/board" className="text-stone-600 hover:text-green-700 block transition-colors">{translations[currentLang].board.title || 'Medical Board'}</Link></li>
+                            <li><Link to="/heritage/governance/rights" className="text-stone-600 hover:text-green-700 block transition-colors">{translations[currentLang].rights.title || 'Privacy Rights'}</Link></li>
                           </ul>
                         </div>
                       </div>
