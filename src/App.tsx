@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
@@ -169,6 +170,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer t={t} />
+      <Analytics />
     </div>
   );
 }
